@@ -1,0 +1,25 @@
+stack : [top ---------- bottom]	 de nb elements
+
+    	nb - 1	<--- 	 0		sens de lecture
+
+
+parsing -->
+inversion de la stack
+
+
+operations autorisees :
+
+	- swap : echange des 2 derniers elements d'une pile.
+
+	- push : transferts du dernier element d'une pile sur une autre pile.
+
+	- rotate : le haut de la pile se retrouve en bas de celle-ci ==> decalage de +1
+
+	- reverse rotate : le bas de la pile se retrouve en haut de celle-ci ==> decalage de -1
+
+
+objectif :
+
+	- pile a : le plus grand nombre en bas.
+
+	- pile b : le plus petit nombre en bas.

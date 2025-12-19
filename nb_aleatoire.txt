@@ -1,0 +1,24 @@
+Générer un aléatoire :
+	echo $RANDOM
+
+Générer un aléatoire entre 0 & 100 :
+	echo $(($RANDOM%100))
+
+Dans un script bash :
+	NOM_VARIABLE = `echo $(($ RANDOM))`
+
+
+# Générer un nombre aléatoire entre 1 et 100
+	shuf -i 1-100 -n 1
+
+# Générer dix nombres aléatoires entre 1 et 100
+	shuf -i 1-100 -n 10
+
+min=30
+max=100
+n=$[($RANDOM % ($[$max - $min] + 1)) + $min]
+echo $n
+
+
+100 nombres entre 0 et 1000 :
+	./push_swap $(shuf -i 0-1000 -n 100) | wc -l

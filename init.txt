@@ -1,0 +1,25 @@
+si i & j dans la stack a, 4 posibilités :
+
+	- i & j dans la moitié sup.		(1)
+
+	- i dans la moitié sup & j dans la moitié inf.
+
+	- i & j dans la moitié inf.		(1)
+
+	- i dans la moitié inf & j dans la moitié sup.
+
+
+
+
+si i dans la stack a & j dans la stack b, 4 posibilités :
+
+	- i & j dans la moitié sup de leur stack respective.		(1)
+
+	- i dans la moitié sup & j dans la moitié inf de leur stack respective.
+
+	- i & j dans la moitié inf de leur stack respective.		(1)
+
+	- i dans la moitié inf & j dans la moitié sup de leur stack respective.
+
+
+(1) : Dans chaque cas, 2 possbilités : i > j ou i < j.
