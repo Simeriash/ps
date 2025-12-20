@@ -6,7 +6,7 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 12:34:44 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/20 14:06:57 by julauren         ###   ########.fr       */
+/*   Updated: 2025/12/20 16:25:08 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char	**ft_split_ps(const char *s);
 int		ft_atoi_ps(const char *str, int *ctrl);
 int		ft_format_stack(t_stack *a);
 int		ft_k_distribution_sort(t_stack *a);
-int		ft_turkish_sort(t_stack *a);
 int		ft_max_value(t_stack *x);
+int		ft_turkish_sort(t_stack *a);
+void	ft_sort_stack(t_stack *a);
 
 #endif

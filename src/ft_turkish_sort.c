@@ -6,25 +6,11 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 13:55:34 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/20 14:31:22 by julauren         ###   ########.fr       */
+/*   Updated: 2025/12/20 16:28:35 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-
-static int	ft_stack_sorted(t_stack *a)
-{
-	int	i;
-
-	i = 0;
-	while (i < a->nb - 1)
-	{
-		if (a->list[i] < a->list[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 static int	ft_min(t_stack *x, int min)
 {
@@ -81,8 +67,6 @@ int	ft_turkish_sort(t_stack *a)
 	if (!(b.list))
 		return (-1);
 	len = a->nb;
-	if (ft_stack_sorted(a))
-		return (0);
 	b.list = malloc(sizeof (int) * len);
 	if (!(b.list))
 		return (-1);
@@ -145,15 +129,12 @@ int	ft_turkish_sort(t_stack *a)
 		if (b.nb == 2 && (b.list[1] < b.list[0]))
 			ft_swap_b(&b);
 	}
-	if (a->nb > 2 && !(ft_stack_sorted(a)))
-	{
-		if (a->max == 2)
-			ft_rotate_a(a);
-		if (a->max == 1)
-			ft_reverse_rotate_a(a);
-		if (a->list[2] > a->list[1])
-			ft_swap_a(a);
-	}
+	if (a->max == 2)
+		ft_rotate_a(a);
+	else if (a->max == 1)
+		ft_reverse_rotate_a(a);
+	if (a->list[2] > a->list[1])
+		ft_swap_a(a);
 	while (a->nb < len)
 	{
 		a->min = ft_min(a, b.list[b.nb - 1]);
@@ -201,26 +182,7 @@ int	ft_turkish_sort(t_stack *a)
 		ft_push_a(a, &b);
 	}
 	a->max = ft_max(a, INT_MAX);
-	if (a->max)
-	{
-		a->median = (a->nb - 1) / 2;
-		if (a->max > a->median)
-		{
-			while (a->max < a->nb)
-			{
-				ft_rotate_a(a);
-				(a->max)++;
-			}
-		}
-		else
-		{
-			while (a->max > 0)
-			{
-				ft_reverse_rotate_a(a);
-				(a->max)--;
-			}
-		}
-	}
+	ft_sort_stack(a);
 	free(b.list);
 	return (0);
 }
