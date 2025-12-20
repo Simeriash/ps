@@ -6,105 +6,101 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:46:42 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/18 18:01:53 by julauren         ###   ########.fr       */
+/*   Updated: 2025/12/20 11:25:41 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static void	ft_up_max(t_stack *x, char c)
+static void	ft_up_max(t_stack *b)
 {
-	x->median = (x->nb - 1) / 2;
-	if (x->max >= x->median)
+	b->median = (b->nb - 1) / 2;
+	if (b->max >= b->median)
 	{
-		while (x->max < (x->nb - 1))
+		while (b->max < (b->nb - 1))
 		{
-			ft_rotate(x, c);
-			(x->max)++;
+			ft_rotate_b(b);
+			(b->max)++;
 		}
 	}
 	else
 	{
-		while (x->max >= 0)
+		while (b->max >= 0)
 		{
-			ft_reverse_rotate(x, c);
-			(x->max)--;
+			ft_reverse_rotate_b(b);
+			(b->max)--;
 		}
 	}
 }
 
-static void	ft_full_stock_b(t_stack *a, t_stack *b, int *pivot)
+static void	ft_special_k(t_stack *a, t_stack *b, int *list_index)
 {
-	ft_push_b(b, a);
-	if (b->nb > 1 && (b->list[b->nb - 1] <= *pivot))
-		ft_rotate(b, 'b');
-	(*pivot)++;
-}
+	int		delta;
+	int		pivot;
 
-static void	ft_next_index(t_stack *a, t_stack *b, int *pivot, int delta)
-{
-	int	tmp;
-
-	tmp = a->list[ft_min(a, INT_MIN)];
-	while (a->max == -1)
-	{
-		a->max = a->nb - 1;
-		while (a->max >= 0 && (a->list[a->max] > (tmp + delta)))
-			(a->max)--;
-		tmp++;
-	}
-	a->min = 0;
-	while ((a->min <= (a->nb - 1)) && (a->list[a->min] > (tmp + delta))
-		&& a->min < a->max)
-		(a->min)++;
-	if ((a->nb - a->max - 1) > (a->min + 1))
-		a->max = a->min;
-	if (a->nb > 1)
-		ft_up_max(a, 'a');
-	ft_full_stock_b(a, b, &tmp);
-	(*pivot) = tmp;
-}
-
-static void	ft_special_k(t_stack *a, t_stack *b, int pivot, int delta)
-{
+	delta = (a->nb) / 20 + 2;
+	pivot = 0;
 	while (a->nb > 0)
 	{
-		if (a->list[a->nb - 1] <= (pivot + delta))
-			ft_full_stock_b(a, b, &pivot);
-		else
+		if (list_index[a->nb - 1] <= (pivot + delta))
 		{
-			a->max = a->nb - 1;
-			while (a->max >= 0 && (a->list[a->max] > (pivot + delta)))
-				(a->max)--;
-			if (a->max == -1)
-				ft_next_index(a, b, &pivot, delta);
-			else
-				ft_rotate(a, 'a');
+			ft_push_b(b, a);
+			if (b->nb > 1 && (list_index[a->nb - 1] <= pivot))
+				ft_rotate_b(b);
+			pivot++;
 		}
+		else if (a->nb > 1)
+			ft_rotate_a(a, list_index);
 	}
 	while (b->nb > 0)
 	{
 		b->max = ft_max(b, INT_MAX);
 		if (b->nb > 1)
-			ft_up_max(b, 'b');
+			ft_up_max(b);
 		ft_push_a(a, b);
+	}
+}
+
+static void	ft_list_index(t_stack *a, int *list_index)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < a->nb)
+	{
+		list_index[i] = 0;
+		i++;
+	}
+	i = 0;
+	while (i < a->nb)
+	{
+		j = 0;
+		while (j < a->nb)
+		{
+			if (a->list[i] > a->list[j])
+				(list_index[i])++;
+			j++;
+		}
+		i++;
 	}
 }
 
 int	ft_sort_stack(t_stack *a)
 {
 	t_stack	b;
-	int		delta;
-	int		pivot;
+	int		*list_index;
 
 	b.list = malloc(sizeof (int) * (a->nb));
 	if (!(b.list))
 		return (-1);
+	list_index = malloc(sizeof (*list_index) * (a->nb));
+	if (!list_index)
+		return (-1);
 	b.nb = 0;
-	delta = (a->nb) / 20 + 7;
-	a->min = ft_min(a, INT_MIN);
-	pivot = a->list[a->min];
-	ft_special_k(a, &b, pivot, delta);
+	ft_list_index(a, list_index);
+	ft_special_k(a, &b, list_index);
 	free(b.list);
+	free(list_index);
 	return (0);
 }
