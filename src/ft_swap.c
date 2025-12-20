@@ -6,13 +6,13 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 13:29:24 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/20 11:18:43 by julauren         ###   ########.fr       */
+/*   Updated: 2025/12/20 13:17:53 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_swap(t_stack *x)
+static void	ft_swap(t_stack *x)
 {
 	int	tmp;
 
@@ -21,12 +21,19 @@ void	ft_swap(t_stack *x)
 	x->list[x->nb - 2] = tmp;
 }
 
+void	ft_swap_a(t_stack *a)
+{
+	ft_swap(a);
+	write(1, "sa\n", 3);
+}
+
 void	ft_swap_b(t_stack *b)
 {
 	ft_swap(b);
 	write(1, "sb\n", 3);
 }
-void	ft_swap_a(t_stack *a, int *list_index)
+
+void	ft_swap_al(t_stack *a, int *list_index)
 {
 	int	tmp;
 	int	tmp_index;
@@ -39,6 +46,7 @@ void	ft_swap_a(t_stack *a, int *list_index)
 	list_index[a->nb - 2] = tmp_index;
 	write(1, "sa\n", 3);
 }
+
 void	ft_both_swap(t_stack *a, t_stack *b, int *list_index)
 {
 	int	tmp;

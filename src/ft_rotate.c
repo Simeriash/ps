@@ -6,13 +6,13 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:14:56 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/20 11:16:37 by julauren         ###   ########.fr       */
+/*   Updated: 2025/12/20 13:14:31 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-void	ft_rotate(t_stack *x)
+static void	ft_rotate(t_stack *x)
 {
 	int	i;
 	int	tmp;
@@ -27,13 +27,19 @@ void	ft_rotate(t_stack *x)
 	x->list[0] = tmp;
 }
 
+void	ft_rotate_a(t_stack *a)
+{
+	ft_rotate(a);
+	write(1, "ra\n", 3);
+}
+
 void	ft_rotate_b(t_stack *b)
 {
 	ft_rotate(b);
 	write(1, "rb\n", 3);
 }
 
-void	ft_rotate_a(t_stack *a, int *list_index)
+void	ft_rotate_al(t_stack *a, int *list_index)
 {
 	int	i;
 	int	tmp;

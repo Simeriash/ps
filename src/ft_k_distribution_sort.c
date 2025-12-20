@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sort_stack.c                                    :+:      :+:    :+:   */
+/*   ft_k_distribution_sort.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 11:46:42 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/20 11:25:41 by julauren         ###   ########.fr       */
+/*   Updated: 2025/12/20 14:02:55 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,23 @@ static void	ft_special_k(t_stack *a, t_stack *b, int *list_index)
 	int		delta;
 	int		pivot;
 
-	delta = (a->nb) / 20 + 2;
+	delta = (a->nb) / 20 + 7;
 	pivot = 0;
 	while (a->nb > 0)
 	{
 		if (list_index[a->nb - 1] <= (pivot + delta))
 		{
 			ft_push_b(b, a);
-			if (b->nb > 1 && (list_index[a->nb - 1] <= pivot))
+			if (b->nb > 1 && (list_index[a->nb] <= pivot))
 				ft_rotate_b(b);
 			pivot++;
 		}
 		else if (a->nb > 1)
-			ft_rotate_a(a, list_index);
+			ft_rotate_al(a, list_index);
 	}
 	while (b->nb > 0)
 	{
-		b->max = ft_max(b, INT_MAX);
+		b->max = ft_max_value(b);
 		if (b->nb > 1)
 			ft_up_max(b);
 		ft_push_a(a, b);
@@ -86,7 +86,7 @@ static void	ft_list_index(t_stack *a, int *list_index)
 	}
 }
 
-int	ft_sort_stack(t_stack *a)
+int	ft_k_distribution_sort(t_stack *a)
 {
 	t_stack	b;
 	int		*list_index;
@@ -94,13 +94,13 @@ int	ft_sort_stack(t_stack *a)
 	b.list = malloc(sizeof (int) * (a->nb));
 	if (!(b.list))
 		return (-1);
+	b.nb = 0;
 	list_index = malloc(sizeof (*list_index) * (a->nb));
 	if (!list_index)
 		return (-1);
-	b.nb = 0;
 	ft_list_index(a, list_index);
 	ft_special_k(a, &b, list_index);
-	free(b.list);
 	free(list_index);
+	free(b.list);
 	return (0);
 }
