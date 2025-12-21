@@ -6,7 +6,7 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 12:34:44 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/20 16:25:08 by julauren         ###   ########.fr       */
+/*   Updated: 2025/12/21 14:02:16 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include <stdio.h>		//A EFFACER !!!
 # include "src/libft/libft.h"
 
 typedef struct s_stack	t_stack;
@@ -27,13 +26,6 @@ struct s_stack
 	int	max;
 	int	min;
 	int	median;
-};
-
-typedef struct s_index	t_index;
-struct s_index
-{
-	int	i;
-	int	ctrl;
 };
 
 int		main(int ac, char **av);
@@ -58,6 +50,9 @@ int		ft_format_stack(t_stack *a);
 int		ft_k_distribution_sort(t_stack *a);
 int		ft_max_value(t_stack *x);
 int		ft_turkish_sort(t_stack *a);
-void	ft_sort_stack(t_stack *a);
+int		ft_min(t_stack *x, int min);
+int		ft_max(t_stack *x, int max);
+void	ft_push_to_b(t_stack *a, t_stack *b);
+void	ft_push_to_a(t_stack *a, t_stack *b, int len);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:12:38 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/19 16:03:32 by julauren         ###   ########.fr       */
+/*   Updated: 2025/12/21 12:50:51 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ static int	ft_count_nb(const char *str)
 	return (count);
 }
 
-static int	ft_fill_in_stack(char **tab, t_stack *a)
+static int	ft_fill_in_stack(char **tab, t_stack *a, int *ctrl)
 {
-	t_index		index;
+	int			i;
 	static int	j;
 
-	index.i = 0;
-	index.ctrl = 0;
-	while (tab[index.i])
+	i = 0;
+	*ctrl = 0;
+	while (tab[i])
 	{
-		a->list[j] = ft_atoi_ps(tab[index.i], &index.ctrl);
-		if (index.ctrl == 1)
+		a->list[j] = ft_atoi_ps(tab[i], ctrl);
+		if (*ctrl == 1)
 		{
-			j = index.i;
+			j = i;
 			while (tab[j])
 			{
 				free(tab[j]);
@@ -59,9 +59,9 @@ static int	ft_fill_in_stack(char **tab, t_stack *a)
 			free(tab);
 			return (-2);
 		}
-		free(tab[index.i]);
+		free(tab[i]);
 		j++;
-		(index.i)++;
+		i++;
 	}
 	free(tab);
 	return (0);
@@ -69,23 +69,23 @@ static int	ft_fill_in_stack(char **tab, t_stack *a)
 
 static int	ft_fill_in_tab(int ac, char **av, t_stack *a)
 {
-	t_index	index;
+	int		i;
+	int		ctrl;
 	char	**tab;
 
-	index.i = 1;
-	while (index.i < ac)
+	i = 1;
+	while (i < ac)
 	{
-		tab = ft_split_ps(av[index.i]);
+		tab = ft_split_ps(av[i]);
 		if (!tab)
 			return (-1);
-		index.ctrl = ft_fill_in_stack(tab, a);
-		if (index.ctrl < 0)
+		if (ft_fill_in_stack(tab, a, &ctrl) < 0)
 			return (-2);
-		(index.i)++;
+		i++;
 	}
-	index.ctrl = ft_format_stack(a);
-	if (index.ctrl < 0)
-		return (index.ctrl);
+	ctrl = ft_format_stack(a);
+	if (ctrl < 0)
+		return (ctrl);
 	return (0);
 }
 
