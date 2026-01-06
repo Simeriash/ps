@@ -6,7 +6,7 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:12:38 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/21 12:50:51 by julauren         ###   ########.fr       */
+/*   Updated: 2026/01/06 09:53:41 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,10 @@ static int	ft_fill_in_stack(char **tab, t_stack *a, int *ctrl)
 		a->list[j] = ft_atoi_ps(tab[i], ctrl);
 		if (*ctrl == 1)
 		{
-			j = i;
-			while (tab[j])
+			while (tab[i])
 			{
-				free(tab[j]);
-				j++;
+				free(tab[i]);
+				i++;
 			}
 			free(tab);
 			return (-2);
@@ -104,8 +103,6 @@ int	ft_make_list(int ac, char **av, t_stack *a)
 		(a->nb) += ctrl;
 		i++;
 	}
-	if (a->nb == 1)
-		return (-1);
 	a->list = malloc(sizeof(int) * (a->nb));
 	if (!(a->list))
 		return (-1);

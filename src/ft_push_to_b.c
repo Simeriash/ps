@@ -6,7 +6,7 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 12:08:03 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/21 13:57:19 by julauren         ###   ########.fr       */
+/*   Updated: 2026/01/06 14:52:04 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	ft_push_to_b(t_stack *a, t_stack *b)
 		{
 			ft_rotate_a(a);
 			a->max = 0;
-			continue ;
 		}
 		if (b->nb > 2 && (a->list[a->nb - 1] < b->list[b->nb - 1]))
 		{
