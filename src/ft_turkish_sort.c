@@ -6,7 +6,7 @@
 /*   By: julauren <julauren@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 13:55:34 by julauren          #+#    #+#             */
-/*   Updated: 2025/12/21 14:03:38 by julauren         ###   ########.fr       */
+/*   Updated: 2026/01/07 11:25:03 by julauren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_turkish_sort(t_stack *a)
 		ft_rotate_a(a);
 	else if (a->max == 1)
 		ft_reverse_rotate_a(a);
-	if (a->list[2] > a->list[1])
+	if (a->list[a->nb - 1] > a->list[ a->nb - 2])
 		ft_swap_a(a);
 	ft_push_to_a(a, &b, len);
 	a->max = ft_max(a, INT_MAX);
